@@ -11,28 +11,22 @@ class AuthController {
     if (user != null) {
       saveUser(user);
       _user = user;
-
-      Navigator.pushReplacementNamed(
-          //se estiver logado ele redireciona para a home
-          context,
-          "/home");
+      Navigator.pushReplacementNamed(context, "/home", arguments: user);
     } else {
-      Navigator.pushReplacementNamed(
-          //senao vai para o login
-          context,
-          "/login");
+      Navigator.pushReplacementNamed(context, "/login");
     }
   }
 
   Future<void> saveUser(UserModel user) async {
     final instance = await SharedPreferences.getInstance();
     await instance.setString("user", user.toJson());
+    return;
   }
 
   Future<void> currentUser(BuildContext context) async {
     final instance = await SharedPreferences.getInstance();
     await Future.delayed(Duration(seconds: 2));
-    if (instance.containsKey("User")) {
+    if (instance.containsKey("user")) {
       final json = instance.get("user") as String;
       setUser(context, UserModel.fromJson(json));
       return;

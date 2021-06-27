@@ -13,7 +13,7 @@ class LoginController {
       final response = await _googleSignIn.signIn();
       final user = UserModel(
         name: response!.displayName!,
-        photourl: response.photoUrl!,
+        photoURL: response.photoUrl!,
       );
       authcontroller.setUser(context, user);
     } catch (error) {

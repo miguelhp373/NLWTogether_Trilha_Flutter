@@ -2,11 +2,12 @@ import 'dart:convert';
 
 class UserModel {
   final String name;
-  final String? photourl;
+  final String? photoURL;
 
-  UserModel({required this.name, required this.photourl});
+  UserModel({required this.name, this.photoURL});
+
   factory UserModel.fromMap(Map<String, dynamic> map) {
-    return UserModel(name: map['name'], photourl: map['photoURL']);
+    return UserModel(name: map['name'], photoURL: map['photoURL']);
   }
 
   factory UserModel.fromJson(String json) =>
@@ -14,7 +15,7 @@ class UserModel {
 
   Map<String, dynamic> toMap() => {
         "name": name,
-        "photourl": photourl,
+        "photoURL": photoURL,
       };
 
   String toJson() => jsonEncode(toMap());
